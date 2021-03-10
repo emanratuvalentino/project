@@ -11,7 +11,4 @@ func Personal(echo *echo.Group) {
 	echo.POST("/personal/simpan", peremajaan.SimpanPersonal)
 	echo.POST("/personal/update", peremajaan.UpdatePersonal)
 	echo.GET("/personal", peremajaan.GetPersonal)
-
-
-
 }
