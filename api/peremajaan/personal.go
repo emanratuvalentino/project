@@ -27,7 +27,7 @@ func SimpanPersonal(c echo.Context) error {
 	layoutISO := "2006-01-02"
 
 	nama := c.FormValue("nama")
-	usia,_ := strconv.Atoi("usia")
+	usia,_ := strconv.Atoi(c.FormValue("nama"))
 	tanggal_lahir, _ := time.Parse(layoutISO, c.FormValue("tanggal_lahir"))
 
 	newPersonal := model.Personal{
@@ -62,7 +62,7 @@ func UpdatePersonal(c echo.Context) error {
 	// configuration := config.GetConfig()
 	layoutISO := "2006-01-02"
 
-	nama := c.FormValue("sk_tanggal")
+	nama := c.FormValue("nama")
 	usia,_ := strconv.Atoi("usia")
 	tanggal_lahir, _ := time.Parse(layoutISO, c.FormValue("tanggal_lahir"))
 	// Golongan := model.Golongan{}
