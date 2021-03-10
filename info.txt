@@ -1,0 +1,3 @@
+Aturan Update Repository :
+1. Lakukan Git pull untuk download update pekerjaan terbaru dari repository
+2. Lakukan Git push untuk upload ke Git
