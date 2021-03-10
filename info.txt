@@ -1,10 +1,6 @@
 Aturan Update Repository :
 1. Lakukan Git pull untuk download update pekerjaan terbaru dari repository
 2. Lakukan Git push untuk upload ke Git
-
-3. lakukan makan siang
-
 3. Lakukan Git Commit sebelum melakukan Git Push
-3. Lakukan apapun harus bahagia
-
-
+4. Lakukan apapun harus bahagia
+5. valen jelek
