@@ -1,0 +1,4 @@
+/config/config.json
+/config/*.pkcs8
+/build
+go.sum

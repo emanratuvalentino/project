@@ -1,0 +1,14 @@
+{
+    "DB_USERNAME": "docudigital",
+    "DB_PASSWORD": "margonda100",
+    "DB_PORT": "7373",
+    "DB_HOST": "202.125.94.151",
+    "DB_NAME": "db_docudigital",
+    "PUBLIC_KEY": "config/id_rsa.pub.pkcs8",
+
+    "MINIO_SERVER" : "202.125.94.152:9000",
+    "MINIO_ACCESS_KEY_ID" : "minio",
+    "MINIO_SECRET_ACCESS_KEY_ID" : "minio123",
+    "MINIO_BUCKET_NAME" : "siasn-instansi" 
+    
+}
