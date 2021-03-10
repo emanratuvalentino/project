@@ -3,4 +3,4 @@ Aturan Update Repository :
 2. Lakukan Git push untuk upload ke Git
 3. Lakukan Git Commit sebelum melakukan Git Push
 4. Lakukan apapun harus bahagia
-5. valen jelek
+6. gede gitaris idaman
