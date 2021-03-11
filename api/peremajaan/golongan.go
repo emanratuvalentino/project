@@ -5,10 +5,11 @@ import (
 	"time"
 
 	// "fmt"
-	"encoding/json"
+	"code-be-docudigital/config"
 	"code-be-docudigital/helper"
 	"code-be-docudigital/model"
-	"code-be-docudigital/config"
+	"encoding/json"
+
 	// "github.com/fatih/structs"
 	"net/http"
 	"strconv"
@@ -79,12 +80,12 @@ func UsulGolonganSave(c echo.Context) error {
 	statusUsulan := 2
 
 	newUsulanMonitoring := model.Usulan{
-		IDUsulan:     u1,
-		JenisLayanan: jenisLayanan,
-		PnsID:        pns_orang_id,
-		InstansiID:   instansiId,
-		StatusUsulan: statusUsulan,
-		TahapanUsulan: 	"Input Berkas",
+		IDUsulan:         u1,
+		JenisLayanan:     jenisLayanan,
+		PnsID:            pns_orang_id,
+		InstansiID:       instansiId,
+		StatusUsulan:     statusUsulan,
+		TahapanUsulan:    "Input Berkas",
 		StatusUsulanNama: "Belum Lengkap",
 	}
 
@@ -144,7 +145,6 @@ func UsulGolonganUpdate(c echo.Context) error {
 		tipe = "I"
 	}
 
-
 	layoutISO := "2006-01-02"
 	mkGolonganTahun, err := strconv.Atoi(c.FormValue("mk_golongan_tahun"))
 	mkGolonganBulan, err := strconv.Atoi(c.FormValue("mk_golongan_bulan"))
@@ -173,18 +173,18 @@ func UsulGolonganUpdate(c echo.Context) error {
 		Tipe:               tipe,
 		IdRiwayatUpdate:    IdRiwayatUpdate,
 	}
-	
+
 	configuration := config.GetConfig()
 	var ResultPns map[string]interface{}
 	var ResultOrang map[string]interface{}
-	url_pns := configuration.PROFILE_PNS_API + "/pns?id="+ c.FormValue("pns_orang_id")
-	url_orang := configuration.PROFILE_PNS_API + "/orang?id="+ c.FormValue("pns_orang_id")
+	url_pns := configuration.PROFILE_PNS_API + "/pns?id=" + c.FormValue("pns_orang_id")
+	url_orang := configuration.PROFILE_PNS_API + "/orang?id=" + c.FormValue("pns_orang_id")
 	ResultPns = helper.GetCurl(url_pns)
 	ResultOrang = helper.GetCurl(url_orang)
 
 	var NIP string
 	var Nama string
-	if(len(ResultPns["Value"].([]interface{})) > 0){
+	if len(ResultPns["Value"].([]interface{})) > 0 {
 		NIP = ResultPns["Value"].([]interface{})[0].(map[string]interface{})["nip_baru"].(string)
 	} else {
 		return c.JSON(http.StatusNotAcceptable, map[string]string{
@@ -192,18 +192,18 @@ func UsulGolonganUpdate(c echo.Context) error {
 			"message": "Data PNS Tidak Ditemukan",
 		})
 	}
-	if(len(ResultOrang["Value"].([]interface{})) > 0){
+	if len(ResultOrang["Value"].([]interface{})) > 0 {
 		Nama = ResultOrang["Value"].([]interface{})[0].(map[string]interface{})["nama"].(string)
 	}
 
 	newUsulanMonitoring := model.Usulan{
-		TipeUsulan: 		tipe,
-		Nip:                NIP,
-		Nama:               Nama,
+		TipeUsulan: tipe,
+		Nip:        NIP,
+		Nama:       Nama,
 		// DokumenUsulanLama:  riwayat_lama,
-		IdRiwayatUpdate: IdRiwayatUpdate,
-		StatusUsulan: 	1,
-		TahapanUsulan: 	"Input Berkas",
+		IdRiwayatUpdate:  IdRiwayatUpdate,
+		StatusUsulan:     1,
+		TahapanUsulan:    "Input Berkas",
 		StatusUsulanNama: "Belum Lengkap",
 	}
 
@@ -509,15 +509,15 @@ func BlankUsulGolonganSave(c echo.Context) error {
 	configuration := config.GetConfig()
 	var ResultPns map[string]interface{}
 	var ResultOrang map[string]interface{}
-	url_pns := configuration.PROFILE_PNS_API + "/pns?id="+ c.FormValue("pns_orang_id")
-	url_orang := configuration.PROFILE_PNS_API + "/orang?id="+ c.FormValue("pns_orang_id")
+	url_pns := configuration.PROFILE_PNS_API + "/pns?id=" + c.FormValue("pns_orang_id")
+	url_orang := configuration.PROFILE_PNS_API + "/orang?id=" + c.FormValue("pns_orang_id")
 	ResultPns = helper.GetCurl(url_pns)
 	ResultOrang = helper.GetCurl(url_orang)
 
 	var NIP string
 	var Nama string
-	
-	if(len(ResultPns["Value"].([]interface{})) > 0){
+
+	if len(ResultPns["Value"].([]interface{})) > 0 {
 		NIP = ResultPns["Value"].([]interface{})[0].(map[string]interface{})["nip_baru"].(string)
 		instansiId = ResultPns["Value"].([]interface{})[0].(map[string]interface{})["instansi_kerja_id"].(string)
 	} else {
@@ -526,7 +526,7 @@ func BlankUsulGolonganSave(c echo.Context) error {
 			"message": "Data PNS Tidak Ditemukan",
 		})
 	}
-	if(len(ResultOrang["Value"].([]interface{})) > 0){
+	if len(ResultOrang["Value"].([]interface{})) > 0 {
 		Nama = ResultOrang["Value"].([]interface{})[0].(map[string]interface{})["nama"].(string)
 	}
 	BlankUsulan := make(map[string]interface{})
@@ -545,9 +545,9 @@ func BlankUsulGolonganSave(c echo.Context) error {
 		NamaTableUsul:    namaTableUsul,
 		NamaTabelRiwayat: namaTabelRiwayat,
 		Sumber:           sumberUsulan[sumber],
-		Nip:                NIP,
-		Nama:               Nama,
-		DeviceToken: 	DeviceToken,
+		Nip:              NIP,
+		Nama:             Nama,
+		DeviceToken:      DeviceToken,
 	}
 
 	// Insert Di tabel usulan
