@@ -90,7 +90,7 @@ func GetPersonal1(c echo.Context) error {
 		db = db.Where("id = ?", c.QueryParam("id"))
 	}
 	if c.QueryParam("nama") != "" {
-		db = db.Where("nama = ?", c.QueryParam("nama"))
+		db = db.Where("nama = ?", c.QueryParam("barang"))
 	}
 
 	Personal := []model.Personal1{}

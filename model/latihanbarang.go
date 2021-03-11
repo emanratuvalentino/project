@@ -5,7 +5,7 @@ import "time"
 type Personal1 struct {
 	Id           string    `json:"id"    valid:"required"`
 	Barang       string    `json:"barang"  valid:"required"`
-	Berat        int       `json:"berat"  valid:"required"`
+	Berat        int       `json:"berat_kg"  valid:"required"`
 	TanggalMasuk time.Time `json:"tanggal_masuk"  valid:"required"`
 }
 
