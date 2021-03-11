@@ -68,5 +68,6 @@ func Init() *echo.Echo {
 
 	routelist.Peremajaan(g)
 	routelist.Personal(g)
+	routelist.Barang(g)
 	return e
 }

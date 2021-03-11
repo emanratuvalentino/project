@@ -26,18 +26,18 @@ func SimpanBarang(c echo.Context) error {
 	layoutISO := "2006-01-02"
 
 	barang := c.FormValue("barang")
-	berat, _ := strconv.Atoi(c.FormValue("berat"))
+	berat_kg, _ := strconv.Atoi(c.FormValue("berat_"))
 	tanggal_masuk, _ := time.Parse(layoutISO, c.FormValue("tanggal_masuk"))
 
-	newPersonal := model.Personal1{
+	newBarang := model.Barang{
 		Id:           Id,
 		Barang:       barang,
-		Berat:        berat,
+		Berat_kg:     berat_kg,
 		TanggalMasuk: tanggal_masuk,
 	}
 
 	// Insert Di tabel usulan
-	if dbc := db.Debug().Create(&newPersonal); dbc.Error != nil {
+	if dbc := db.Debug().Create(&newBarang); dbc.Error != nil {
 		return c.JSON(http.StatusNotAcceptable, map[string]string{
 			"error":   "true",
 			"message": dbc.Error.Error(),
@@ -59,17 +59,17 @@ func UpdateBarang(c echo.Context) error {
 	layoutISO := "2006-01-02"
 
 	barang := c.FormValue("barang")
-	berat, _ := strconv.Atoi("berat")
+	berat_kg, _ := strconv.Atoi("berat_kg_")
 	tanggal_masuk, _ := time.Parse(layoutISO, c.FormValue("tanggal_masuk"))
-	// Golongan := model.Golongan{}
+	// Barang := model.Barang{}
 
-	newPersonal := model.Personal1{
+	newBarang := model.Barang{
 		Barang:       barang,
-		Berat:        berat,
+		Berat_kg:     berat_kg,
 		TanggalMasuk: tanggal_masuk,
 	}
 
-	if dbc := db.Debug().Model(&newPersonal).Updates(newPersonal).Where("id = ?", Id); dbc.Error != nil {
+	if dbc := db.Debug().Model(&newBarang).Updates(newBarang).Where("id = ?", Id); dbc.Error != nil {
 		return c.JSON(http.StatusNotAcceptable, map[string]string{
 			"error":   "true",
 			"message": dbc.Error.Error(),
@@ -78,23 +78,23 @@ func UpdateBarang(c echo.Context) error {
 
 	return c.JSON(http.StatusOK, map[string]string{
 		"error":   "false",
-		"message": "Data Usulan Golongan Berhasil Diupdate",
+		"message": "Data Usulan Barang Berhasil Diupdate",
 	})
 
 }
 
-func GetPersonal1(c echo.Context) error {
+func GetBarang(c echo.Context) error {
 
 	db := db.Manager()
 	if c.QueryParam("id") != "" {
 		db = db.Where("id = ?", c.QueryParam("id"))
 	}
 	if c.QueryParam("nama") != "" {
-		db = db.Where("nama = ?", c.QueryParam("barang"))
+		db = db.Where("nama = ?", c.QueryParam("nama"))
 	}
 
-	Personal := []model.Personal1{}
-	rows := db.Find(&Personal)
+	Barang := []model.Barang{}
+	rows := db.Find(&Barang)
 	return c.JSON(http.StatusOK, rows)
 
 }

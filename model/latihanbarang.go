@@ -1,14 +1,16 @@
 package model
 
-import "time"
+import (
+	"time"
+)
 
-type Personal1 struct {
+type Barang struct {
 	Id           string    `json:"id"    valid:"required"`
 	Barang       string    `json:"barang"  valid:"required"`
-	Berat        int       `json:"berat_kg"  valid:"required"`
-	TanggalMasuk time.Time `json:"tanggal_masuk"  valid:"required"`
+	Berat_kg     int       `json:"berat_kg"  valid:"required"`
+	TanggalMasuk time.Time `json:"tangga_masuk"  valid:"required"`
 }
 
-func (Personal1) TableName() string {
+func (Barang) TableName() string {
 	return "latihan_barang"
 }

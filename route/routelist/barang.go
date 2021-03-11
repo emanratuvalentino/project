@@ -6,10 +6,9 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
-func LatihanBarang(echo *echo.Group) {
+func Barang(echo *echo.Group) {
 
 	echo.POST("/latihanbarang/simpan", peremajaan.SimpanBarang)
 	echo.POST("/latihanbarang/update", peremajaan.UpdateBarang)
-	echo.GET("/latihanbarang", peremajaan.GetPersonal1)
-
+	echo.GET("/latihanbarang", peremajaan.GetBarang)
 }
