@@ -29,7 +29,7 @@ func SimpanBarang(c echo.Context) error {
 	berat, _ := strconv.Atoi(c.FormValue("berat"))
 	tanggal_masuk, _ := time.Parse(layoutISO, c.FormValue("tanggal_masuk"))
 
-	newPersonal := model.Personal{
+	newPersonal := model.Personal1{
 		Id:           Id,
 		Barang:       barang,
 		Berat:        berat,
@@ -63,7 +63,7 @@ func UpdateBarang(c echo.Context) error {
 	tanggal_masuk, _ := time.Parse(layoutISO, c.FormValue("tanggal_masuk"))
 	// Golongan := model.Golongan{}
 
-	newPersonal := model.Personal{
+	newPersonal := model.Personal1{
 		Barang:       barang,
 		Berat:        berat,
 		TanggalMasuk: tanggal_masuk,
@@ -83,7 +83,7 @@ func UpdateBarang(c echo.Context) error {
 
 }
 
-func GetPersonal(c echo.Context) error {
+func GetPersonal1(c echo.Context) error {
 
 	db := db.Manager()
 	if c.QueryParam("id") != "" {
@@ -93,7 +93,7 @@ func GetPersonal(c echo.Context) error {
 		db = db.Where("nama = ?", c.QueryParam("nama"))
 	}
 
-	Personal := []model.Personal{}
+	Personal := []model.Personal1{}
 	rows := db.Find(&Personal)
 	return c.JSON(http.StatusOK, rows)
 

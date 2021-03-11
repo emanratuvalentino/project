@@ -10,6 +10,6 @@ func LatihanBarang(echo *echo.Group) {
 
 	echo.POST("/latihanbarang/simpan", peremajaan.SimpanBarang)
 	echo.POST("/latihanbarang/update", peremajaan.UpdateBarang)
-	echo.POST("/latihanbarang", peremajaan.GetPersonal)
+	echo.POST("/latihanbarang", peremajaan.GetPersonal1)
 
 }
