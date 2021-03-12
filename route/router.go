@@ -50,8 +50,6 @@ func Init() *echo.Echo {
 	--------------------------------------------------*/
 	g := e.Group("/api")
 
-
-
 	/*-------------------------------------------------
 		DISABLING JWT CUZ API GW ALREADY DID THAT
 	key, _ := helper.GetRSAPublicKey()
@@ -70,5 +68,6 @@ func Init() *echo.Echo {
 
 	routelist.Peremajaan(g)
 	routelist.Personal(g)
+	routelist.Barang(g)
 	return e
 }

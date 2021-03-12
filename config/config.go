@@ -18,7 +18,7 @@ type Configuration struct {
 	MINIO_SECRET_ACCESS_KEY_ID string
 	REFERENSI_SERVER           string
 	PROFILE_PNS_API            string
-	DISPATCHER_API            string
+	DISPATCHER_API             string
 }
 
 func GetConfig() Configuration {

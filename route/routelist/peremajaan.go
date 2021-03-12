@@ -12,6 +12,4 @@ func Peremajaan(echo *echo.Group) {
 	echo.POST("/peremajaan/golongan/update-data", peremajaan.UsulGolonganUpdate)
 	echo.POST("/peremajaan/golongan/hapus", peremajaan.UsulDeleteGolongan)
 
-
-
 }
