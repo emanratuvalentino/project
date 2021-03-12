@@ -19,20 +19,18 @@ import (
 
 func SimpanBarang(c echo.Context) error {
 	db := db.Manager()
-
 	u1 := uuid.Must(uuid.NewV4())
 	Id := u1.String()
 	// configuration := config.GetConfig()
 	layoutISO := "2006-01-02"
-
 	barang := c.FormValue("barang")
-	berat_kg, _ := strconv.Atoi(c.FormValue("berat_"))
+	beratkg, _ := strconv.Atoi(c.FormValue("berat_kg"))
 	tanggal_masuk, _ := time.Parse(layoutISO, c.FormValue("tanggal_masuk"))
 
 	newBarang := model.Barang{
 		Id:           Id,
 		Barang:       barang,
-		Berat_kg:     berat_kg,
+		Berat_kg:     beratkg,
 		TanggalMasuk: tanggal_masuk,
 	}
 
@@ -59,17 +57,17 @@ func UpdateBarang(c echo.Context) error {
 	layoutISO := "2006-01-02"
 
 	barang := c.FormValue("barang")
-	berat_kg, _ := strconv.Atoi("berat_kg_")
-	tanggal_masuk, _ := time.Parse(layoutISO, c.FormValue("tanggal_masuk"))
-	// Barang := model.Barang{}
+	beratkg, _ := strconv.Atoi("berat_kg")
+	tanggalmasuk, _ := time.Parse(layoutISO, c.FormValue("tanggal_masuk"))
+	// Barang := model.Golongan{}
 
 	newBarang := model.Barang{
 		Barang:       barang,
-		Berat_kg:     berat_kg,
-		TanggalMasuk: tanggal_masuk,
+		Berat_kg:     beratkg,
+		TanggalMasuk: tanggalmasuk,
 	}
 
-	if dbc := db.Debug().Model(&newBarang).Updates(newBarang).Where("id = ?", Id); dbc.Error != nil {
+	if dbc := db.Debug().Model(&newBarang).Update(newBarang).Where("id = ?", Id); dbc.Error != nil {
 		return c.JSON(http.StatusNotAcceptable, map[string]string{
 			"error":   "true",
 			"message": dbc.Error.Error(),
@@ -89,8 +87,8 @@ func GetBarang(c echo.Context) error {
 	if c.QueryParam("id") != "" {
 		db = db.Where("id = ?", c.QueryParam("id"))
 	}
-	if c.QueryParam("nama") != "" {
-		db = db.Where("nama = ?", c.QueryParam("nama"))
+	if c.QueryParam("barang") != "" {
+		db = db.Where("barang = ?", c.QueryParam("barang"))
 	}
 
 	Barang := []model.Barang{}
