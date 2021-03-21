@@ -30,7 +30,7 @@ func SimpanBarang(c echo.Context) error {
 	newBarang := model.Barang{
 		Id:           Id,
 		Barang:       barang,
-		Berat_kg:     beratkg,
+		BeratKg:      beratkg,
 		TanggalMasuk: tanggal_masuk,
 	}
 
@@ -57,17 +57,17 @@ func UpdateBarang(c echo.Context) error {
 	layoutISO := "2006-01-02"
 
 	barang := c.FormValue("barang")
-	beratkg, _ := strconv.Atoi("berat_kg")
-	tanggalmasuk, _ := time.Parse(layoutISO, c.FormValue("tanggal_masuk"))
+	beratkg, _ := strconv.Atoi(c.FormValue("berat_kg"))
+	tanggal_masuk, _ := time.Parse(layoutISO, c.FormValue("tanggal_masuk"))
 	// Barang := model.Golongan{}
 
 	newBarang := model.Barang{
 		Barang:       barang,
-		Berat_kg:     beratkg,
-		TanggalMasuk: tanggalmasuk,
+		BeratKg:      beratkg,
+		TanggalMasuk: tanggal_masuk,
 	}
 
-	if dbc := db.Debug().Model(&newBarang).Update(newBarang).Where("id = ?", Id); dbc.Error != nil {
+	if dbc := db.Debug().Model(&newBarang).Where("id = ?", Id).Update(newBarang); dbc.Error != nil {
 		return c.JSON(http.StatusNotAcceptable, map[string]string{
 			"error":   "true",
 			"message": dbc.Error.Error(),
@@ -79,6 +79,35 @@ func UpdateBarang(c echo.Context) error {
 		"message": "Data Usulan Barang Berhasil Diupdate",
 	})
 
+}
+
+func DeleteBarang(c echo.Context) error {
+	db := db.Manager()
+	Id := c.FormValue("id")
+	layoutISO := "2006-01-01"
+
+	barang := ""
+	beratkg := 0
+	tanggal_masuk, _ := time.Parse(layoutISO, "2000-01-01")
+
+	newBarang := model.Barang{
+		Id:           Id,
+		Barang:       barang,
+		BeratKg:      beratkg,
+		TanggalMasuk: tanggal_masuk,
+	}
+
+	if dbc := db.Debug().Delete(&newBarang); dbc.Error != nil {
+		return c.JSON(http.StatusNotAcceptable, map[string]string{
+			"error":   "true",
+			"message": dbc.Error.Error(),
+		})
+	}
+
+	return c.JSON(http.StatusOK, map[string]string{
+		"error":   "false",
+		"message": "Data Usulan Barang Berhasil Dihapus",
+	})
 }
 
 func GetBarang(c echo.Context) error {
