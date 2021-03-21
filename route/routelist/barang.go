@@ -9,7 +9,9 @@ import (
 func Barang(echo *echo.Group) {
 
 	echo.POST("/latihanbarang/simpan", peremajaan.SimpanBarang)
-	echo.POST("/latihanbarang/update/", peremajaan.UpdateBarang)
+	echo.POST("/latihanbarang/update", peremajaan.UpdateBarang)
 	echo.GET("/latihanbarang", peremajaan.GetBarang)
-	echo.PUT("/latihanbarang/update/:id", peremajaan.UpdateBarang)
+	echo.PUT("/latihanbarang/simpanbarang/", peremajaan.SimpanBarang)
+	echo.PUT("/latihanbarang/update", peremajaan.UpdateBarang)
+	echo.DELETE("/latihanbarang/delete", peremajaan.DeleteBarang)
 }
